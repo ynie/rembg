@@ -1,11 +1,29 @@
+print("line a1.")
+print("line a2.")
+
 import os
+
+print("line 13.")
+
 from typing import Type
+
+print("line a4.")
 
 import onnxruntime as ort
 
+print("line a5.")
+
 from .sessions import sessions_class
+
+print("line a6.")
+
 from .sessions.base import BaseSession
+
+print("line a7.")
+
 from .sessions.u2net import U2netSession
+
+print("line a8.")
 
 
 def new_session(
@@ -28,6 +46,7 @@ def new_session(
     Returns:
         BaseSession: The created session object.
     """
+    print("line 1.")
     session_class: Type[BaseSession] = U2netSession
 
     for sc in sessions_class:
@@ -35,10 +54,12 @@ def new_session(
             session_class = sc
             break
 
+    print("line 2.")
     sess_opts = ort.SessionOptions()
 
     if "OMP_NUM_THREADS" in os.environ:
         sess_opts.inter_op_num_threads = int(os.environ["OMP_NUM_THREADS"])
         sess_opts.intra_op_num_threads = int(os.environ["OMP_NUM_THREADS"])
 
+    print("line 3.")
     return session_class(model_name, sess_opts, providers, *args, **kwargs)

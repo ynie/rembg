@@ -31,8 +31,10 @@ class BaseSession:
         else:
             self.providers.extend(_providers)
 
+        model_path = str(self.__class__.download_models(*args, **kwargs))
+
         self.inner_session = ort.InferenceSession(
-            str(self.__class__.download_models(*args, **kwargs)),
+            model_path,
             providers=self.providers,
             sess_options=sess_opts,
         )

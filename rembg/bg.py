@@ -1,8 +1,10 @@
+
 import io
 from enum import Enum
 from typing import Any, List, Optional, Tuple, Union
 
 import numpy as np
+
 from cv2 import (
     BORDER_DEFAULT,
     MORPH_ELLIPSE,
@@ -11,13 +13,10 @@ from cv2 import (
     getStructuringElement,
     morphologyEx,
 )
+
 from PIL import Image, ImageOps
 from PIL.Image import Image as PILImage
-from pymatting.alpha.estimate_alpha_cf import estimate_alpha_cf
-from pymatting.foreground.estimate_foreground_ml import estimate_foreground_ml
-from pymatting.util.util import stack_images
 from scipy.ndimage import binary_erosion
-
 from .session_factory import new_session
 from .sessions import sessions_class
 from .sessions.base import BaseSession
@@ -38,6 +37,9 @@ def alpha_matting_cutout(
     background_threshold: int,
     erode_structure_size: int,
 ) -> PILImage:
+    from pymatting.alpha.estimate_alpha_cf import estimate_alpha_cf
+    from pymatting.foreground.estimate_foreground_ml import estimate_foreground_ml
+    from pymatting.util.util import stack_images
     """
     Perform alpha matting on an image using a given mask and threshold values.
 
