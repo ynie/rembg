@@ -1,10 +1,8 @@
-
 import io
 from enum import Enum
 from typing import Any, List, Optional, Tuple, Union
 
 import numpy as np
-
 from cv2 import (
     BORDER_DEFAULT,
     MORPH_ELLIPSE,
